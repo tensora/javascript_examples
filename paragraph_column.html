@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+	<div id="div1">
+	
+		<p id="p1"></p>
+	
+	</div>
+
+	<script>
+	
+		function printArray(arr){
+			for (let i = 0; i < arr.length; i++) {				
+				const para = document.createElement("p");
+				const node = document.createTextNode(arr[i]);
+				para.appendChild(node);
+				document.getElementById("p1").appendChild(para);
+			}
+			const emptyP = document.createElement("br");
+			const node = document.createTextNode("");
+			emptyP.appendChild(node);
+			document.getElementById("p1").appendChild(emptyP);
+		}
+		function printWelcome(arr,nr){
+			for(let i = 0; i < nr; i++){
+				printArray(arr)
+			}
+		}
+		function emptyNodeList(parent,list){
+			const listLength = list.length;
+			for(let i = 0;i<listLength;i++){
+				parent.removeChild(list[0]);
+			}
+		}
+	
+		let arrayForNames = ["Hej","Peter","och","Daniel"];
+		let welcomeNr = 5;
+		
+		printWelcome(arrayForNames,welcomeNr);
+		
+		const children = document.getElementById("p1").childNodes;
+		const parent = document.getElementById("p1");
+		//Printar paragrafens noder i konsolen.
+		console.log(parent);
+		
+		//Denna funktion tömmer paragrafen på dess noder.
+		//emptyNodeList(parent,children);
+
+	</script>
+</body>
+
+</html>
+

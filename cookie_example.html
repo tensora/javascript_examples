@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+	<label for="cName">Cookie-name:</label><br>
+    <input type="text" id="cName"><br>
+	
+	<label for="cText">Cookie-text:</label><br>
+    <input type="text" id="cText"><br>
+	
+	<button onclick="store()" id="b1">Store cookie</button>
+	<button onclick="show()" id="b2">Show cookie</button>
+	<button onclick="deleteC()" id="b3">Delete cookie</button>
+	
+	<p id="p1"></p>
+	
+	<script>
+	
+	//Kanske göra till bankkonto där man stoppar in pengar??
+	function store() {
+		let cText = document.getElementById("cText").value;
+		let cName = document.getElementById("cName").value;
+		document.cookie = cName+"="+cText+
+							"; expires=Thu, 18 Dec 2021 12:00:00 UTC; path=/";
+	}
+	
+	function show(){
+		let myCookie = document.cookie;
+		document.getElementById("p1").innerHTML = myCookie;
+	}
+	
+	function deleteC(){
+		let cName = document.getElementById("cName").value; 
+		document.cookie = cName+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+	}
+		
+
+	</script>
+	
+</body>
+
+</html>
+

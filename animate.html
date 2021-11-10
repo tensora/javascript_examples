@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<style>
+		#container {
+		  width: 400px;
+		  height: 400px;
+		  position: relative;
+		  background: yellow;
+		}
+		#b1 {
+		  width: 50px;
+		  height: 50px;
+		  position: absolute;
+		  <!-- background-color: red; -->
+		}
+		#p1 {
+			color:red;
+			font-size:50px;
+		}
+	</style>
+<body>
+
+	<p id="p1"></p>
+	<p id="p2"></p>
+	
+
+	<div id ="container">
+	  <div id ="animate"></div>
+	  <p><button id="b1" onclick="youWin()">Click Me</button></p>
+	</div>
+
+	<script>
+	
+		let win = document.getElementById("container");
+		win.style.width = window.innerWidth+"px";
+		win.style.height = window.innerHeight+"px";
+		win.style.backgroundColor = "rgb(224, 224, 224)";
+	
+		function youWin(){
+			setText();
+		}
+
+		function myMove() {
+		  let id = null;
+		  const elem = document.getElementById("b1");   
+		  let pos = 0;
+		  clearInterval(id);
+		  id = setInterval(frame, 5);
+		  function frame() {
+			if (pos == 350) {
+				pos=0;
+			  <!-- clearInterval(id); -->
+			} else {
+			  pos+=2; 
+			  elem.style.top = pos + "px"; 
+			  elem.style.left = pos + "px"; 
+			}
+		  }
+		}
+
+		function setText(){
+			document.getElementById("p1").innerHTML = "YOU HAVE WON 1000.0000$!\n"
+			var str = "Follow this link to claim your prize!"
+			var result = str.link("https://vr-makeitrain.glitch.me/");
+			document.getElementById("p1").innerHTML += "<p>"+result;
+		}
+
+		setTimeout( myMove, 500);
+
+	</script>
+
+</body>
+</html>

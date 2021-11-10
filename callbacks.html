@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+	<label for="cName">Display 1:</label><br>
+	<p id="p1"></p>
+	<label for="cName">Display 2:</label><br>
+	<p id="p2"></p>
+	<label for="cName">Display 3:</label><br>
+	<p id="p3"></p>
+	
+	<script>
+		
+		function myDisplayer(text,nr) {
+			if(!nr){
+				document.getElementById("p1").innerHTML = text;
+			}else{
+				document.getElementById("p"+nr).innerHTML = text;
+			}
+		}
+		
+		function myCalculator(num1, num2, myCallback) {
+			let sum = num1 + num2;
+			myCallback(sum);
+			
+		}
+		
+		function sayPappa(){
+			return "baba!";
+		}
+
+		//Skicka in en funktion som parameter i en annan funktion
+		myCalculator(5, 5, myDisplayer);
+		//Skicka in en funktion med en parameter som parameter i en annan funktion.
+		//Observera hur myDisplayer ignorerar parametern sum myCalculator.
+		myCalculator(5,5,function(){myDisplayer(2+3,"2");});
+		
+		myCalculator(5,5,function(){myDisplayer(sayPappa,"3");});
+		
+		
+	</script>
+	
+</body>
+
+</html>
+

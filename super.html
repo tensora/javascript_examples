@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+	<div id="div1">
+	
+	<p id="p1"></p>
+	
+	</div>
+
+	<script>
+	
+		//Skapar klassen
+		class Person {
+			//Funktionen som körs automatisk när du skapar ett objekt av klassen.
+			constructor(name, lastName, age) {
+			this.name = name;
+			this.lastname = lastName;
+			this.age = age;
+			this.legal = false;
+			//Metoden testar om personen är myndig.
+			this.checkLegal();
+			
+			}
+			
+			//Resten är bara metoder som hör till objeket.
+			//I js finns inga funktioner, det finns bara metoder.
+			//Metoderna skall helst bara modifiera attribut till sitt eget objekt.
+			checkLegal(){
+				if(this.age>=18){
+					this.legal = true;
+				}
+			}
+			//Egentligen ska bara this returneras,
+			//printandet skall göras nån annan stans.
+			toString(){
+				console.log(this);
+			}
+			birthday(){
+				this.age+=1;
+				this.checkLegal();
+			}
+			greet(othPerson){
+				let othPersName = othPerson.name;
+				console.log("Hello "+othPersName+"\n"+
+							"My name is "+this.name);
+			}
+		}
+		
+		//Vi skapar en klass som ärver allt från klassen Person
+		class SuperHero extends Person {
+		  constructor(name, lastName, age, superName) {
+			super(name, lastName, age);
+			this.superName = superName;
+			this.fly = false;
+		  }
+		  fly(){
+			this.fly = true;
+		  }
+		}
+		
+		function main(){
+		
+			//Vi skapar ett objekt av klassen person.
+			//Alla attribut måste fyllas.
+			let per1 = new Person("Mats","Persson",16);
+			//Här anropar vi en metod hos objekete per1 som är av klass Person.
+			per1.toString();
+			
+			per1.birthday();
+			per1.toString();
+			
+			per1.birthday();
+			per1.toString();
+		
+			//console.log(this);
+			
+			let hero1 = new SuperHero("Bruce","Wayne",45,"Batman");
+			hero1.toString();
+			
+			per1.greet(hero1);
+		
+		}
+		
+		main();
+		
+
+	</script>
+	
+</body>
+
+</html>
+
