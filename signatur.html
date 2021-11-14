@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+	<!-- Canvas ignorerar width och height definierat i style. -->
+	<style>
+		#container{
+		  border: 1px solid black;
+		}
+	</style>
+</head>
+
+<body>
+
+	<canvas 
+	id="container" 
+	height="100"
+	width="200"
+	onmousedown="clickTrue()"
+	onmouseup="clickFalse()"
+	onmousemove="showCoords(event)"></canvas><br>
+	<!-- onmouseout="clearCoor()"></canvas><br> -->
+	
+	<label for="title">Pixels:</label><br>
+	<p id="demo"></p>
+	<label for="array">Arrays:</label><br>
+	<p id="demo2"></p>
+	<p id="demo3"></p>
+
+	
+	<script>
+	mouseDown = false;
+	const x1=[];
+	const y1=[];
+	
+	var canvas = document.getElementById("container");
+	var ctx = canvas.getContext("2d");
+	ctx.fillStyle = "#FF0000";
+	
+	function clickTrue(){
+		mouseDown=true;
+	}
+	function clickFalse(){
+		mouseDown=false;
+	}
+	
+	function drawPoints(x,y){
+		if(mouseDown){
+		//clearRect can be used to clear the canvas.
+		//ctx.clearRect(0, 0, 200, 150);
+		x1.push(x);
+		y1.push(y);
+		ctx.beginPath();
+		ctx.ellipse(x, y, 3, 3, 0, 0, Math.PI * 2);
+		ctx.fill();
+		}else{//Do nothing.
+		}
+	}
+		
+	function showCoords(event) {
+	  var x = event.offsetX;
+	  var y = event.offsetY;
+	  var coor = "X coords: " + x + ", Y coords: " + y;
+	  document.getElementById("demo").innerHTML = coor;
+	  document.getElementById("demo2").innerHTML = "x1: "+x1.toString();
+	  document.getElementById("demo3").innerHTML = "y1: "+y1.toString();
+	  console.log();
+	  drawPoints(x,y);
+	}
+
+	<!-- function clearCoor() { -->
+	  <!-- document.getElementById("demo").innerHTML = ""; -->
+	<!-- } -->
+		
+	</script>
+	
+</body>
+
+</html>
+
