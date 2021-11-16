@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+	
+	<style>
+	
+	body {
+	  width: 100%;
+	  height: 100%;
+	  background: #000;
+	  overflow: hidden;
+	}
+
+	.fade {
+	  position: relative;
+	  width: 100%;
+	  min-height: 60vh;
+	  top: -25px;
+	  background-image: linear-gradient(0deg, transparent, black 75%);
+	  z-index: 1;
+	}
+
+	.star-wars {
+	  display: flex;
+	  justify-content: center;
+	  position: relative;
+	  height: 800px;
+	  color: #feda4a;
+	  font-family: 'Pathway Gothic One', sans-serif;
+	  font-size: 500%;
+	  font-weight: 600;
+	  letter-spacing: 6px;
+	  line-height: 150%;
+	  perspective: 400px;
+	  text-align: justify;
+	}
+
+	.crawl{
+	  position: relative;
+	  top: 9999px;
+	  transform-origin: 50% 100%;
+	  animation: crawl 2s linear;
+	}
+
+	.crawl > .title{
+	  font-size: 90%;
+	  text-align: center;
+	}
+
+	.crawl > .title h1{
+	  margin: 0 0 100px;
+	  text-transform: uppercase;
+	}
+
+	@keyframes crawl{
+	  0% {
+		top: 0;
+		transform: rotateX(20deg)  translateZ(0);
+	  }
+	  100% { 
+		top: -6000px;
+		transform: rotateX(25deg) translateZ(-2500px);
+	  }
+	}
+
+	.crawl2{
+	  position: relative;
+	  top: 9999px;
+	  transform-origin: 50% 100%;
+	  animation: crawl2 2s linear;
+	}
+
+	.crawl2 > .title{
+	  font-size: 90%;
+	  text-align: center;
+	}
+
+	.crawl2 > .title h1{
+	  margin: 0 0 100px;
+	  text-transform: uppercase;
+	}
+
+	@keyframes crawl2{
+	  100% {
+		top: 0;
+		transform: rotateX(20deg)  translateZ(0);
+	  }
+	  0% { 
+		top: -6000px;
+		transform: rotateX(25deg) translateZ(-2500px);
+	  }
+	}
+
+	</style>
+</head>
+
+<body>
+
+	
+	<div class="fade"></div>
+
+	<section class="star-wars">
+
+	  <div id="c1" class="crawl">
+
+		<div id="t1" class="title">
+		  <p>Episode IV</p>
+		  <h1>A New Hope</h1>
+		</div>
+		
+		<p>It is a period of civil war. Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire.</p>      
+		<p>During the battle, Rebel spies managed to steal secret plans to the Empire’s ultimate weapon, the DEATH STAR, an armored space station with enough power to destroy an entire planet.</p>
+		<p>Pursued by the Empire’s sinister agents, Princess Leia races home aboard her starship, custodian of the stolen plans that can save her people and restore freedom to the galaxy…</p>
+
+	  </div>
+
+	</section>
+	
+	<script>
+	
+	//This value must be the same as in both styles' animations!!!
+	//For example: 5 seconds gives -> animation: crawl2 5s linear;
+	let animationLength = 2;
+	
+	function stopScroll(){
+		cElement.style.webkitAnimationPlayState = "paused";
+		enableScroll();
+	}
+	
+	var cElement = document.getElementById("c1");
+	stopScroll();
+	
+	function mergeAnimation(crawlAppendix,addSub,directionBuffer,snrSign){
+		cElement.style.webkitAnimationPlayState = "running";
+		
+		if(sToggle){
+			cElement.className = "crawl"+crawlAppendix;
+			let crawlDelay = -(directionBuffer-snrSign*(animationLength/10));
+			console.log("Set crawl delay to: "+crawlDelay.toString()+"s")
+			cElement.style.animationDelay = crawlDelay.toString()+"s";
+		}else{
+			//Do nothing.
+		}
+		
+		snr+=addSub;
+		console.log("snr: "+snr);
+	
+	}
+	
+	let snr=0;
+	let sToggle = true;
+	let prevScroll;
+	function enableScroll(){
+		document.addEventListener('wheel', function(e1)
+		
+		
+		{
+			
+			disableScroll(arguments.callee);
+			setTimeout(stopScroll,100*animationLength);
+		
+			
+			if(prevScroll){
+				if(prevScroll-e1.deltaY==0){
+					sToggle=false;
+				}else{
+					sToggle=true;
+				}
+			}
+			console.log("toggle: "+sToggle);
+			
+			if(e1.deltaY>0){
+				//console.log("Scroll down");
+				mergeAnimation("",1,0,-snr);
+			}else{
+				//console.log("Scroll up");
+				mergeAnimation("2",-1,animationLength,snr);
+			}
+			prevScroll=e1.deltaY;
+		}
+		);
+	}
+	function disableScroll(anonymous){
+		document.removeEventListener("wheel",anonymous);
+	}
+		
+	</script>
+	
+</body>
+
+</html>
+
