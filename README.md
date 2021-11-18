@@ -8,4 +8,5 @@ Random code examples
   <a href="https://tensora.github.io/javascript_examples/super.html">Super Class</a><br>
   <a href="https://tensora.github.io/javascript_examples/signatur.html">Draw Signature</a><br>
   <a href="https://tensora.github.io/javascript_examples/starwars.html">Star Wars Scroll</a><br>
+  <a href="https://tensora.github.io/javascript_examples/starwars_autoscroll.html">Star Wars Auto Scroll</a><br>
  </html>
