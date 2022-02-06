@@ -37,7 +37,8 @@
 	purple = [["u","v","w","x"],["y","3","4","5"],["U","V","W","X"],["Y",".",",","'"]];
 	cube = [yellow,blue,red,white,purple,green];
 	
-	function getsemirand(limit){
+	function getsemirand(limit,rnint){
+	console.log(rnint);
 	r=[];
 	A1 = 1;
 	A2 = 5;
@@ -45,14 +46,14 @@
 	show = 0;
 	pcon = 1;
 	for(let i=3;i< limit;i++){
-		scale = 1/(2*i-1);
+		scale = (1/(2*i-1));
 		A3n = A2-A2n;
 		A3 = 2*A3n+2*i-1;
 		show = (A3*scale*scale-0.5)*pcon;
 		if(show*pcon<1){
-			pcon = pcon*10;}
+			pcon = pcon*rnint;}
 		if(show*pcon>1){
-			pcon = pcon/10;}
+			pcon = pcon/(rnint);}
 		toprint = show*pcon*100;
 		rounded = Math.round(toprint);
 		squared = (toprint-rounded)*100*(toprint-rounded)*100;
@@ -71,8 +72,8 @@
 	plen = length.test_str2;
 	pass_c = 10000;
 	
-	let randnr = getsemirand((pass_c*3+3+test_str2.length*10));
-	//console.log(randnr);
+	let randnr = getsemirand((pass_c*3+3+test_str2.length*10),test_str2.charCodeAt(0));
+	console.log(randnr);
 	
 	pass_array = [];
 	test_str = test_str2;
