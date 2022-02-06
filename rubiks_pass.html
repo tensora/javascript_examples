@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+	<label for="cName">Key:</label><br>
+    <input type="text" id="cName"><br>
+	
+	<label for="cText">Number:</label><br>
+    <input type="text" id="cText"><br>
+	
+	<button onclick="store()" id="b1">Get password</button><br>
+	
+	<input type="text" id="myInput">
+	
+	<pre id="p1"></pre>
+	
+	<pre id="p2"></pre>
+
+	<div id="div1">
+	
+	</div>
+
+	<script>
+	
+	cubesize = 4;
+	
+	yellow = [["a","b","c","d"],["e","1","2","3"],["A","B","C","D"],["E","@","%","+"]];
+	blue = [["f","g","h","i"],["j","4","5","6"],["F","G","H","I"],["J","=","&","!"]];
+	red = [["k","l","m","n"],["o","7","8","9"],["K","L","M","N"],["O","#","$","?"]];
+	white = [["p","q","r","s"],["t","0","1","2"],["P","Q","R","S"],["T",":","*",";"]];
+	green = [["z","a","b","c"],["d","6","7","8"],["Z","A","B","C"],["D","\"","_"," "]];
+	purple = [["u","v","w","x"],["y","3","4","5"],["U","V","W","X"],["Y",".",",","'"]];
+	cube = [yellow,blue,red,white,purple,green];
+	
+	function getsemirand(limit){
+	r=[];
+	A1 = 1;
+	A2 = 5;
+	A2n = 1;
+	show = 0;
+	pcon = 1;
+	for(let i=3;i< limit;i++){
+		scale = 1/(2*i-1);
+		A3n = A2-A2n;
+		A3 = 2*A3n+2*i-1;
+		show = (A3*scale*scale-0.5)*pcon;
+		if(show*pcon<1){
+			pcon = pcon*10;}
+		if(show*pcon>1){
+			pcon = pcon/10;}
+		toprint = show*pcon*100;
+		rounded = Math.round(toprint);
+		squared = (toprint-rounded)*100*(toprint-rounded)*100;
+		A2n = A3n;
+		A2 = A3;
+		r.push(Math.round(squared));
+		}
+	
+	return r;
+	}
+	
+	function store(){
+	let test_str2 = document.getElementById("cName").value;
+	let pass_row = parseInt(document.getElementById("cText").value);
+
+	plen = length.test_str2;
+	pass_c = 10000;
+	
+	let randnr = getsemirand((pass_c*3+3+test_str2.length*10));
+	//console.log(randnr);
+	
+	pass_array = [];
+	test_str = test_str2;
+	phrase = "";
+	change=0;
+	for(let j =0;j<pass_c;j++){
+	pass = "";
+
+	for(let i=0;i<test_str.length;i++){
+		keyint = test_str.charCodeAt(i);
+		pass += cube[(keyint+randnr[i+j])%6][(keyint+randnr[j+i+pass_c])%4][(keyint+randnr[j+i+2*pass_c])%4];
+
+	}
+	phrase+=pass+"\n";
+	pass_array.push(pass);
+	}
+	
+	var Text = pass_array[(randnr[pass_row]*randnr[pass_row])%pass_c];
+	//document.getElementById("p1").innerHTML = Text;
+	document.getElementById("myInput").value = Text;
+	//document.getElementById("p2").innerHTML = phrase;
+	
+	  /* Get the text field */
+	  var copyText = document.getElementById("myInput");
+
+	  /* Select the text field */
+	  copyText.select();
+	  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+	  /* Copy the text inside the text field */
+	  navigator.clipboard.writeText(copyText.value);
+	  
+	  /* Alert the copied text */
+	  alert("Copied the text: " + copyText.value);
+	}
+	
+	</script>
+</body>
+
+</html>
+
